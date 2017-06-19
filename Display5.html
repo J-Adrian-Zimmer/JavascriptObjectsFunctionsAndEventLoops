@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<header>
+<title> Display5 from "Javascript Objects, Functions, and Event
+Loops"</title>
+<script type="text/javascript"
+        src="JavascriptEventLoopTools.js">
+</script>
+<style>
+.lower_center {
+   position:absolute;
+   width:100%;
+   text-align:center;
+   top:50%;
+}
+.upper_center {
+   position:absolute;
+   width:100%;
+   text-align:center;
+   bottom:50%;
+}
+</style>
+</header>
+<body>
+<div id='upper' class="upper_center"></div>
+<div id='lower' class="lower_center"></div>
+<!-- end of body but for the script -->
+
+<script type="text/javascript">
+var running = true;
+
+installQer('q1500',1500);
+installQer('q850',850);
+
+// Stateful writeMessage
+
+function writeMessage() {
+   if( !running ) return;
+   var ms = writeMessage.messages,
+       i = 2*writeMessage.which;
+   if(writeMessage.run) {
+      writeMessage.which = (writeMessage.which+1)%3;
+      document.getElementById('upper').innerText = ms[i];
+      document.getElementById('lower').innerText = ms[i+1];
+   };
+   writeMessage.q1500()
+}
+
+writeMessage.messages = [
+   "Politicians and diapers should be changed frequently",
+   "and for the same reason.",
+   "Actions speak louder than words",
+   "but not nearly as often.",
+   "Don't let schooling interfere",
+    "with your education"
+];
+writeMessage.which = 0;
+writeMessage.run = true;
+
+
+// Stateful setColor
+
+function setColor() {
+   if( !running ) return;
+   var cs = setColor.colors,
+       i = setColor.which;
+   if(setColor.run) {
+      setColor.which = (setColor.which+1)%3;
+      document.bgColor = cs[i];
+   };
+   setColor.q850()
+}
+
+setColor.colors = [ "BBFFFF", "FFBBFF", "FFFFBB" ];
+setColor.which=0;
+setColor.run=true;
+
+
+// Keystroke Event Handler
+
+document
+ .addEventListener(
+   'keydown',
+   function (e) {
+     if( e.code=='Escape' ) running = false;
+   } 
+ );
+
+
+// Start
+
+writeMessage();
+setColor();
+
+</script>
+</body>
+</html>
+

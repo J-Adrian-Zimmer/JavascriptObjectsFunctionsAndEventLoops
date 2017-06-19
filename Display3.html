@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<header>
+<title> Display3 from "Javascript Objects, Functions, and Event
+Loops"</title>
+<style>
+.lower_center {
+   position:absolute;
+   width:100%;
+   text-align:center;
+   top:50%;
+}
+.upper_center {
+   position:absolute;
+   width:100%;
+   text-align:center;
+   bottom:50%;
+}
+</style>
+</header>
+<body>
+<div id='upper' class="upper_center"></div>
+<div id='lower' class="lower_center"></div>
+<script>
+var messages = [
+   "Politicians and diapers should be changed frequently",
+   "and for the same reason.",
+   "Actions speak louder than words",
+   "but not nearly as often.",
+   "Don't let schooling interfere",
+    "with your education"
+];
+var colors = [ "BBFFFF", "FFBBFF", "FFFFBB" ]
+
+function writeMessage(which) {
+   document.getElementById('upper').innerText = messages[2*which];
+   document.getElementById('lower').innerText = messages[2*which+1];
+   setTimeout(
+       function () { 
+          writeMessage( (which+1)%3 )
+       },
+       1500
+   )
+}
+
+function setColor(which) {
+   document.bgColor = colors[which];
+   setTimeout(
+       function () {
+          setColor( (which+1)%3 )
+       },
+       850
+   )
+}
+
+writeMessage(0);
+setColor(0);
+</script>
+</body>
+</html>
+

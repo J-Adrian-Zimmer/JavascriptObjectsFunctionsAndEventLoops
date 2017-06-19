@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<header>
+<title> Display2 from "Javascript Objects, Functions, and Event
+Loops"</title>
+<style>
+.lower_center {
+   position:absolute;
+   width:100%;
+   text-align:center;
+   top:50%;
+}
+.upper_center {
+   position:absolute;
+   width:100%;
+   text-align:center;
+   bottom:50%;
+}
+</style>
+</header>
+<body>
+<div id='upper' class="upper_center">upper</div>
+<div id='lower' class="lower_center">lower</div>
+<script>
+
+function writeMessage(line1,line2) {
+   document.getElementById('upper').innerText = line1;
+   document.getElementById('lower').innerText = line2;
+}
+
+document
+ .addEventListener(
+   "click",
+   function aHandler (event) {
+     writeMessage(
+         'X coord: ' + event.pageX,
+         'Y coord: ' + event.pageY
+     )
+   }
+ )
+
+writeMessage('Click','someplace');
+
+</script>
+</body>
+</html>
+

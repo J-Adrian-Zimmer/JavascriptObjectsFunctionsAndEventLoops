@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<header>
+<title> Display7 from "Javascript Objects, Functions, and Event
+Loops"</title>
+<script 
+  src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+<style>
+.lower_center {
+   position:absolute;
+   width:100%;
+   text-align:center;
+   top:22%;
+}
+.upper_center {
+   position:absolute;
+   width:100%;
+   text-align:center;
+   bottom:80%;
+}
+</style>
+</header>
+<body>
+<div id='upper' class="upper_center">
+   <button id='aButton'>Explain Things</button> 
+</div>
+<div id='lower' class="lower_center"></div>
+
+<script>
+
+function writeMessage(txt) {
+   document
+     .getElementById('lower')
+     .innerText = txt;
+}
+
+document
+ .getElementById('aButton')
+ .addEventListener(
+   'click',
+   function() {  
+     var p = new Promise(
+               function(resolve,reject) {
+                  $.ajax({
+                    url: "sample.txt", 
+                    success: resolve ,
+                    error: reject 
+               } ) }
+             );
+     p.then ( 
+        txt => writeMessage(txt)
+     ).catch(
+        err => writeMessage(err.statusMessage)
+     )
+   }
+ )
+</script>
+
+</body>
+</html>
