@@ -5,28 +5,26 @@
 //   copyright: 2017
 //   by J Adrian Zimmer, jazimmer.net
 //   MIT License
-
-// Contains factory methods for making promises:
-//   hesitating (creates a promise that will hesitate
-//               before becoming settled)
-//   asPromise  (converts function, with Nodejs style 
-//               callback to a promise)
-
-// Also contains  
-//     installQer (installs a method in Function.prototype)
-// The installed function lets you write 
+//
+// Contains a factory method for making promises:
+//   hesitating 
+// which creates a promise that will hesitate before 
+// becoming fulfilled.
+//
+// Also contains an installer
+//     installQer 
+// which installs a method in Function.prototype that
+// lets you write
 //     f.<your choice of function name>(...)
 // to put a function f on the event queue (i.e. the macrotask queue) 
-// with specified arguments;  event queue placement will be
-// after a delay that you specify when you run installQer
-
+//
 // Find more documentation in two places 
 //
 //  https://github.com/J-Adrian-Zimmer/JavascriptObjectsFunctionsAndEventLoops/README.md
 //
 //  in the ebook
 //    "Javscript: Objects, Functions, and Event Loops"
-
+//
 // The ebook is available in Kindle form from Amazon and 
 // in epub form from other sources and it contains usage 
 // examples.
@@ -52,43 +50,6 @@ function hesitating(
        )
     }
   );
-}
-
-function asPromise() {
-   // usage:
-   //   asPromise(f,...)
-   // returns a promise
-   
-   // f should work this way
-   //    f(...,cb)
-   // where cb is a callback that
-   // works this way
-   //    cb(err, ... )
-   // i.e. the way Node.js does error handling
-
-
-   var args1 = Array.from(arguments),
-       f     = args1.shift();
-   
-   return new Promise(
-      function (resolve,reject) {
-        function callback() {
-           var args2 = Array.from(arguments),
-               err = args2.shift();
-           if(err)  {
-              reject(err);
-           } else if( args2.length<=1 ) {
-              resolve(args2[0]);
-           } else { 
-              resolve(args2);
-           }
-        }
-        
-        args1.push(callback);
-        f.apply( {}, args1 );
-     }
-  );
-
 }
 
 function installQer(desired_name,delay) {
