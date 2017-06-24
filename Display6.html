@@ -3,9 +3,6 @@
 <header>
 <title> Display6 from "Javascript Objects, Functions, and Event
 Loops"</title>
-<script type="text/javascript"
- src="JavascriptEventLoopTools.js">
-</script>
 <style>
 .lower_center {
    position:absolute;
@@ -20,11 +17,13 @@ Loops"</title>
    bottom:50%;
 }
 </style>
+<script type="text/javascript"
+ src="JavascriptEventLoopTools.js">
+</script>
 </header>
 <body>
 <div id='upper' class="upper_center"></div>
 <div id='lower' class="lower_center"></div>
-<!-- end of body but for the script -->
 
 <script type="text/javascript">
 
@@ -36,12 +35,10 @@ function writeMessage() {
    if( !running ) return;
    var ms = writeMessage.messages,
        i = 2*writeMessage.which;
-   if(writeMessage.run) {
-      writeMessage.which = (writeMessage.which+1)%3;
-      document.getElementById('upper').innerText = ms[i];
-      document.getElementById('lower').innerText = ms[i+1];
-      hesitating(1500).then(writeMessage)
-   };
+   writeMessage.which = (writeMessage.which+1)%3;
+   document.getElementById('upper').innerText = ms[i];
+   document.getElementById('lower').innerText = ms[i+1];
+   hesitating(1500).then(writeMessage)
 }
 
 writeMessage.messages = [
@@ -50,10 +47,9 @@ writeMessage.messages = [
    "Actions speak louder than words",
    "but not nearly as often.",
    "Don't let schooling interfere",
-    "with your education"
+   "with your education"
 ];
 writeMessage.which = 0;
-writeMessage.run = true;
 
 
 // Stateful setColor
@@ -62,16 +58,13 @@ function setColor() {
    if( !running ) return;
    var cs = setColor.colors,
        i = setColor.which;
-   if(setColor.run) {
-      setColor.which = (setColor.which+1)%3;
-      document.bgColor = cs[i];
-      hesitating(850).then(setColor)
-   };
+   setColor.which = (setColor.which+1)%3;
+   document.bgColor = cs[i];
+   hesitating(850).then(setColor)
 }
 
 setColor.colors = [ "BBFFFF", "FFBBFF", "FFFFBB" ];
 setColor.which=0;
-setColor.run=true;
 
 
 // Keystroke Event Handler
