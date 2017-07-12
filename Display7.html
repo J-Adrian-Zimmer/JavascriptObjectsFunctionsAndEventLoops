@@ -49,7 +49,7 @@ document
                } ) }
              );
      p.then ( 
-        txt => writeMessage(txt)
+        writeMessage
      ).catch(
         err => writeMessage(err.statusMessage)
      )
